@@ -1,0 +1,3 @@
+D:/InteliJ/Projects/C++/Aizo/Aizo_Sortowanie/cmake-build-debug/CMakeFiles/Aizo_Sortowanie.dir
+D:/InteliJ/Projects/C++/Aizo/Aizo_Sortowanie/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/InteliJ/Projects/C++/Aizo/Aizo_Sortowanie/cmake-build-debug/CMakeFiles/rebuild_cache.dir
