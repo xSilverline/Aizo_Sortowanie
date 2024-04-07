@@ -85,6 +85,18 @@ build CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateData.cpp.obj: CXX_COMPILER__A
   OBJECT_DIR = CMakeFiles\Aizo_Sortowanie.dir
   OBJECT_FILE_DIR = CMakeFiles\Aizo_Sortowanie.dir\Class
 
+build CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateSortedData.cpp.obj: CXX_COMPILER__Aizo_Sortowanie_unscanned_Debug D$:/InteliJ/Projects/C++/Aizo/Aizo_Sortowanie/Class/GenerateSortedData.cpp || cmake_object_order_depends_target_Aizo_Sortowanie
+  DEP_FILE = CMakeFiles\Aizo_Sortowanie.dir\Class\GenerateSortedData.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Aizo_Sortowanie.dir
+  OBJECT_FILE_DIR = CMakeFiles\Aizo_Sortowanie.dir\Class
+
+build CMakeFiles/Aizo_Sortowanie.dir/Class/GeneratePartialySortedData.cpp.obj: CXX_COMPILER__Aizo_Sortowanie_unscanned_Debug D$:/InteliJ/Projects/C++/Aizo/Aizo_Sortowanie/Class/GeneratePartialySortedData.cpp || cmake_object_order_depends_target_Aizo_Sortowanie
+  DEP_FILE = CMakeFiles\Aizo_Sortowanie.dir\Class\GeneratePartialySortedData.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Aizo_Sortowanie.dir
+  OBJECT_FILE_DIR = CMakeFiles\Aizo_Sortowanie.dir\Class
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Aizo_Sortowanie
@@ -93,7 +105,7 @@ build CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateData.cpp.obj: CXX_COMPILER__A
 #############################################
 # Link the executable Aizo_Sortowanie.exe
 
-build Aizo_Sortowanie.exe: CXX_EXECUTABLE_LINKER__Aizo_Sortowanie_Debug CMakeFiles/Aizo_Sortowanie.dir/Class/main.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/InsertionSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/HeapSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/QuickSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/ShellSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateData.cpp.obj
+build Aizo_Sortowanie.exe: CXX_EXECUTABLE_LINKER__Aizo_Sortowanie_Debug CMakeFiles/Aizo_Sortowanie.dir/Class/main.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/InsertionSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/HeapSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/QuickSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/ShellSort.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateData.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/GenerateSortedData.cpp.obj CMakeFiles/Aizo_Sortowanie.dir/Class/GeneratePartialySortedData.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Aizo_Sortowanie.dir

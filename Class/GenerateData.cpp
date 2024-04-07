@@ -7,8 +7,9 @@
 #include "../Headers/GenerateData.h"
 
 std::default_random_engine generator;
-std::uniform_int_distribution<int> distribution(0,100);
-std::uniform_real_distribution<> dist(0.0,100.0);
+std::uniform_int_distribution<int> distribution(0,1000);
+std::uniform_int_distribution<char> charDist(32,126);
+std::uniform_real_distribution<> dist(0.0,1000.0);
 
 GenerateData::GenerateData()
 {
@@ -22,10 +23,8 @@ int * GenerateData::generateInt(int size)
     for(int i = 0; i<size; i++)
     {
         randomData[i] = distribution(generator);
-//        std::cout<<randomData[i]<<" ";
-
     }
-    std::cout<<std::endl;
+
     return randomData;
 }
 
@@ -34,10 +33,7 @@ float *GenerateData::generateFloat(int size) {
     for(int i = 0; i<size; i++)
     {
         randomData[i] =(float) dist(generator);
-//        std::cout<<randomData[i]<<" ";
-
     }
-    std::cout<<std::endl;
     return randomData;
 }
 
@@ -46,10 +42,7 @@ double *GenerateData::generateDouble(int size) {
     for(int i = 0; i<size; i++)
     {
         randomData[i] = dist(generator);
-//        std::cout<<randomData[i]<<" ";
-
     }
-    std::cout<<std::endl;
     return randomData;
 }
 
@@ -57,11 +50,8 @@ char *GenerateData::generateChar(int size) {
     char *randomData= new char[size];
     for(int i = 0; i<size; i++)
     {
-        randomData[i] = distribution(generator);
-//        std::cout<<randomData[i]<<" ";
-
+        randomData[i] = charDist(generator);
     }
-    std::cout<<std::endl;
     return randomData;
 }
 

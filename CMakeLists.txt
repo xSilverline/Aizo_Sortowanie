@@ -13,4 +13,7 @@ add_executable(Aizo_Sortowanie Class/main.cpp
         Class/ShellSort.cpp
         Headers/ShellSort.h
         Class/GenerateData.cpp
-        Headers/GenerateData.h)
+        Headers/GenerateData.h
+        Class/GenerateSortedData.cpp
+        Class/GeneratePartialySortedData.cpp
+        Headers/GeneratePartialySortedData.h)
