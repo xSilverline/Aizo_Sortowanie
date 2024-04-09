@@ -3,12 +3,19 @@
 //
 
 #include "../Headers/HeapSort.h"
+
+
 void calculate(auto *tab,int size);
+
 void heapify(auto *tab, int size, int i);
 void buildHeap(auto*tab, int size);
+void buildheap(auto*tab, int n);
+void destroyheap(auto*tab, int size);
 
 void HeapSort::sortInt(int *tab, int size) {
+
     calculate(tab,size);
+
 }
 
 void HeapSort::sortFloat(float *tab, int size) {
@@ -24,7 +31,10 @@ void HeapSort::sortChar(char *tab, int size) {
 }
 void calculate(auto *tab,int size)
 {
-    buildHeap(tab,size); // budowanie kopca
+//    buildheap(tab,size);
+//    destroyheap(tab,size);
+
+    buildHeap(tab,size); // budowanie kopca (Cormen (IV) - Rozd. 7 )
     int heapsize = size-1;
     for(int i = size-1; i>0;i--)
     {
@@ -35,12 +45,13 @@ void calculate(auto *tab,int size)
         heapify(tab,heapsize,0); // przywracanie własności
     }
 
+
 }
 
 void heapify(auto *tab, int size, int i) //left 2i , right 2i+1 , parent i/2
 {
     int l = 1+2*i; // index od 0
-    int r = 1+2*i+1;
+    int r = 2+2*i;
     int largest = 0;
 
     if(l<=size && tab[l] > tab[i])
@@ -61,8 +72,9 @@ void heapify(auto *tab, int size, int i) //left 2i , right 2i+1 , parent i/2
 void buildHeap(auto *tab, int size)
 {
 
-    for(int i = (size-1)/2; i>0;i--)
+    for(int i = (size-1)/2; i>=0;i--)
     {
         heapify(tab,size,i);
     }
 }
+

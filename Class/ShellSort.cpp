@@ -82,8 +82,9 @@ void calculate(auto *tab,int size)
 
 }
 
+
 int getShift(int size)
-{
+{ // Odstęp (3^k-1)/2 , Knuth 1973 ( O N^(3/2) )
     int shift = 1;
     while(shift<size)
     {
@@ -97,3 +98,4 @@ int getShift(int size)
         return shift;
 
 }
+

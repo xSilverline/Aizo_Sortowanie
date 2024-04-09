@@ -1,0 +1,440 @@
+//
+// Created by Silver on 09.04.2024.
+//
+
+#include "../Headers/DoubleMenu.h"
+#include <iostream>
+#include "../Headers/GenerateData.h"
+#include "../Headers/GenerateSortedData.h"
+#include "../Headers/GeneratePartialySortedData.h"
+#include "../Headers/InsertionSort.h"
+#include "../Headers/HeapSort.h"
+#include "../Headers/QuickSort.h"
+#include "../Headers/ShellSort.h"
+#include "../Headers/Tester.h"
+#include "../Headers/ShellNotOptimal.h"
+#include "../Headers/QuickSortRight.h"
+#include "../Headers/QuickSortLeft.h"
+#include "../Headers/QuickSortRandom.h"
+#include <chrono>
+#include <windows.h>
+#include <string>
+#include <fstream>
+using namespace std;
+
+
+void DoubleMenu::startCounter() // FUNKCJA STARTUJĄCA LICZNIK DO POMIARU CZASU
+{
+    LARGE_INTEGER largeInteger;
+    if(!QueryPerformanceFrequency(& largeInteger))
+        cout<<"Blad zliczania czasu"<<endl;
+
+    freq = double(largeInteger.QuadPart) / 1000.0;
+
+    QueryPerformanceCounter(& largeInteger);
+    counterStart = largeInteger.QuadPart;
+}
+
+double DoubleMenu::getCounter() // FUNKCJA ZWRACAJĄCA OBECNY STAN LICZNIKA
+{
+    LARGE_INTEGER largeInteger;
+    QueryPerformanceCounter(& largeInteger);
+    return double(largeInteger.QuadPart-counterStart)/freq;
+}
+
+void DoubleMenu::printData(auto *tab,int s) // FUNKCJA WYŚWIETLAJĄCA DANE Z TABLICY
+{
+    for(int i=0;i<s;i++)
+    {
+        cout<<tab[i]<<" ";
+
+    }
+    cout<<endl<<endl;
+}
+DoubleMenu::DoubleMenu()
+{
+    type = 1;
+    sizeOfArray = 0;
+    freq = 0.0;
+    counterStart = 0;
+
+}
+
+
+void DoubleMenu::showMenu() {
+
+    int action = 0;
+
+    while(true)
+    {
+        cout<<"Podaj numer akcji do wykonania:\n";
+        cout<<"1. Wygeneruj nowe dane\n2. Sortowanie przez wstawianie\n3. Sortowanie przez kopcowanie\n4. Sortowanie szybkie\n5. Sortowanie Shella\n6. Wczytaj dane z pliku\n7. PELNE TESTOWANIE\n8. Sortowanie szybkie (prawy pivot)\n9. Sortowanie szybkie (lewy pivot)\n10. Sortowanie szybkie (Random pivot)\n11. Sortowanie shella (N/2^k)\n";
+        cin>>action;
+        if(cin.fail())
+        {
+            cout << "Blad danych wejsciowych\n";
+            cin.clear();
+            cin.ignore();
+        }
+
+        if(action == 1) // GENEROWANIE NOWEJ TABLICY DANYCH DLA ZADANEGO TYPU
+        {
+
+            int gentype=0;
+            cout<<"Generowanie nowych danych\nPodaj rozmiar tablicy:  ";
+            cin>>sizeOfArray;
+            if(sizeOfArray < 0 || cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+
+                cout<<"Blad danych! \n\n";
+                break;
+            }
+
+            cout<<"Rodzaj danych do wygenerowania: "<<endl;
+            cout<<"1. Losowe\n2. Posortowane rosnaco\n3. Posortowane malejaco\n4. Czesciowo posortowane (33%)\n5. Czesciowo posortowane (66%)"<<endl;
+            cin>>gentype;
+            if(gentype < 0 || cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+
+                cout<<"Blad danych! \n\n";
+                break;
+            }
+
+            if(gentype == 1)
+            {
+                generateRandomData();
+            }
+            else if(gentype == 2)
+            {
+                generateSortedData(1);
+            }
+            else if(gentype == 3)
+            {
+                generateSortedData(0);
+            }
+            else if(gentype == 4)
+            {
+                generatePartialySortedData(33);
+            }
+            else if(gentype == 5)
+            {
+                generatePartialySortedData(66);
+            }
+            else
+            {
+                cout<<"Dane nie zostaly wygenerowane"<<endl;
+            }
+
+
+            cout<<"Wygenerowano!\n\n";
+
+        }
+        else if(action == 2) //     SORTOWANIE PRZEZ WSTAWIANIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie przez wstawianie\n";
+            double algoTime = 0.0;
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            InsertionSort::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+
+            delete[] tempArray;
+
+        }
+        else if(action == 3) //     SORTOWANIE PRZEZ KOPCOWANIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie przez kopcowanie"<<endl;
+
+            double algoTime = 0.0;
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            HeapSort::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+
+            delete[] tempArray;
+
+
+        }
+        else if(action == 4) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie szybkie"<<endl;
+            double algoTime = 0.0;
+
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            QuickSort::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+            delete[] tempArray;
+
+
+        }
+        else if(action == 5) //     SORTOWANIE SHELLA - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie Shella"<<endl;
+            double algoTime = 0.0;
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            ShellSort::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+
+            delete[] tempArray;
+
+
+
+        }
+        else if(action == 6) // WCZYTANIE DANYCH Z PLIKU
+        {
+            doubleDataArray = new double[sizeOfArray];
+            readData(doubleDataArray);
+            printData(doubleDataArray,sizeof(doubleDataArray));
+
+        }
+        else if(action == 7) // PEŁNE TESTOWANIE Z POWTÓRZENIEM 100 RAZY, POMIAR CZASU ŚREDNIEGO, SPRAWDZENIE POPRAWNOŚCI SORTOWANIA
+        {
+            cout<<"Podaj rozmiar danych: ";
+            cin>>sizeOfArray;
+
+            if(sizeOfArray < 0 || cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+
+                cout<<"Błąd danych! \n\n";
+                break;
+            }
+            Tester tester(sizeOfArray,type);
+            tester.testSorting();
+
+        }
+        else if(action == 8) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie szybkie (prawy pivot)"<<endl;
+            double algoTime = 0.0;
+
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            QuickSortRight::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+            delete[] tempArray;
+
+
+        }
+        else if(action == 9) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie szybkie (lewy pivot)"<<endl;
+            double algoTime = 0.0;
+
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            QuickSortLeft::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+            delete[] tempArray;
+
+
+        }
+        else if(action == 10) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie szybkie (random pivot)"<<endl;
+            double algoTime = 0.0;
+
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            QuickSortRandom::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+            delete[] tempArray;
+
+
+        }
+        else if(action == 11) //     SORTOWANIE SHELLA - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        {
+            cout<<"Sortowanie Shella"<<endl;
+            double algoTime = 0.0;
+
+            double *tempArray = new double[sizeOfArray];
+            copy(doubleDataArray,doubleDataArray+sizeOfArray,tempArray);
+            printData(tempArray, sizeOfArray);
+            startCounter();
+            ShellNotOptimal::sortDouble(tempArray,sizeOfArray);
+            algoTime = getCounter();
+            printData(tempArray,sizeOfArray);
+            checkData(tempArray,sizeOfArray);
+
+            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            if(checkData(tempArray,sizeOfArray))
+            {
+                cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
+            }
+            else
+                cout<<endl<<"Sortowanie -> FAILED"<<endl<<endl;
+
+            delete[] tempArray;
+
+        }
+
+
+    }
+}
+
+void DoubleMenu::generateRandomData()
+{
+    GenerateData generateData;
+
+    doubleDataArray = GenerateData::generateDouble(sizeOfArray);
+    printData(doubleDataArray, sizeOfArray);
+
+
+}
+
+void DoubleMenu::generateSortedData(int flag)
+{
+    GenerateSortedData sortedData(flag);
+
+    doubleDataArray = GenerateSortedData::generateDouble(sizeOfArray);
+    printData(doubleDataArray, sizeOfArray);
+
+}
+
+void DoubleMenu::generatePartialySortedData(int part)
+{
+    GeneratePartialySortedData partialySortedData(part);
+
+    doubleDataArray = GeneratePartialySortedData::generateDouble(sizeOfArray);
+    printData(doubleDataArray, sizeOfArray);
+
+}
+
+void DoubleMenu::readData(auto array)
+{
+    string fileName;
+    cout<<"Wczytywanie danych z pliku\nPodaj nazwe pliku:  ";
+    cin>>fileName;
+
+    ifstream fileWithData(fileName);
+
+    if(fileWithData.is_open())
+    {
+        int i = 0;
+        fileWithData >> sizeOfArray;
+        for(i; i<sizeOfArray && fileWithData.good();i++)
+        {
+            fileWithData>>array[i];
+        }
+
+        if(i == sizeOfArray)
+            cout<<"Wczytywanie zakonczone prawidlowo!"<<endl<<endl;
+        else
+            cout<<"Blad wczytywania danych!"<<endl<<endl;
+    }
+
+}
+
+int DoubleMenu::checkData(auto *tab,int size) // FUNKCJA SPRAWDZAJĄCA POPRAWNOŚC SORTOWANIA
+{
+    int n=1;
+    while(n<size)
+    {
+        if(tab[n] < tab[n-1])
+        {
+
+            return 0;
+        }
+        n++;
+    }
+    return 1;
+}
+
+

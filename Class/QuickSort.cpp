@@ -35,7 +35,7 @@ void calculate(auto *tab,int p,int r)
     }
 }
 
-int partition(auto *tab, int p, int r) // dwa pivoty z obu stron - Cormen (IV), Rozd. 8
+int partition(auto *tab, int p, int r) // dwa indeksy z obu stron, pivot po środku - Cormen (IV), Rozd. 8
 {
     auto x = tab[p];
     int i = p-1;
