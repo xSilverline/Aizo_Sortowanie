@@ -30,7 +30,7 @@ FloatMenu::FloatMenu()
 
 }
 
-void FloatMenu::startCounter() // FUNKCJA STARTUJĄCA LICZNIK DO POMIARU CZASU
+void FloatMenu::startCounter() // FUNKCJA STARTUJaCA LICZNIK DO POMIARU CZASU
 {
     LARGE_INTEGER largeInteger;
     if(!QueryPerformanceFrequency(& largeInteger))
@@ -42,14 +42,14 @@ void FloatMenu::startCounter() // FUNKCJA STARTUJĄCA LICZNIK DO POMIARU CZASU
     counterStart = largeInteger.QuadPart;
 }
 
-double FloatMenu::getCounter() // FUNKCJA ZWRACAJĄCA OBECNY STAN LICZNIKA
+double FloatMenu::getCounter() // FUNKCJA ZWRACAJaCA OBECNY STAN LICZNIKA
 {
     LARGE_INTEGER largeInteger;
     QueryPerformanceCounter(& largeInteger);
     return double(largeInteger.QuadPart-counterStart)/freq;
 }
 
-void FloatMenu::printData(auto *tab,int s) // FUNKCJA WYŚWIETLAJĄCA DANE Z TABLICY
+void FloatMenu::printData(auto *tab,int s) // FUNKCJA WYŚWIETLAJaCA DANE Z TABLICY
 {
     for(int i=0;i<s;i++)
     {
@@ -132,7 +132,7 @@ void FloatMenu::showMenu() {
             cout<<"Wygenerowano!\n\n";
 
         }
-        else if(action == 2) //     SORTOWANIE PRZEZ WSTAWIANIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 2) //     SORTOWANIE PRZEZ WSTAWIANIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie przez wstawianie\n";
             double algoTime = 0.0;
@@ -145,7 +145,7 @@ void FloatMenu::showMenu() {
             algoTime = getCounter();
             printData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -156,7 +156,7 @@ void FloatMenu::showMenu() {
             delete[] tempArray;
 
         }
-        else if(action == 3) //     SORTOWANIE PRZEZ KOPCOWANIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 3) //     SORTOWANIE PRZEZ KOPCOWANIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie przez kopcowanie"<<endl;
 
@@ -183,7 +183,7 @@ void FloatMenu::showMenu() {
 
 
         }
-        else if(action == 4) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 4) //     SORTOWANIE SZYBKIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie szybkie"<<endl;
             double algoTime = 0.0;
@@ -198,7 +198,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -209,7 +209,7 @@ void FloatMenu::showMenu() {
 
 
         }
-        else if(action == 5) //     SORTOWANIE SHELLA - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 5) //     SORTOWANIE SHELLA - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie Shella"<<endl;
             double algoTime = 0.0;
@@ -223,7 +223,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -243,7 +243,7 @@ void FloatMenu::showMenu() {
             printData(floatDataArray,sizeof(floatDataArray));
 
         }
-        else if(action == 7) // PEŁNE TESTOWANIE Z POWTÓRZENIEM 100 RAZY, POMIAR CZASU ŚREDNIEGO, SPRAWDZENIE POPRAWNOŚCI SORTOWANIA
+        else if(action == 7) // PElNE TESTOWANIE Z POWTÓRZENIEM 100 RAZY, POMIAR CZASU ŚREDNIEGO, SPRAWDZENIE POPRAWNOŚCI SORTOWANIA
         {
             cout<<"Podaj rozmiar danych: ";
             cin>>sizeOfArray;
@@ -253,14 +253,14 @@ void FloatMenu::showMenu() {
                 cin.clear();
                 cin.ignore();
 
-                cout<<"Błąd danych! \n\n";
+                cout<<"Blad danych! \n\n";
                 break;
             }
             Tester tester(sizeOfArray,type);
             tester.testSorting();
 
         }
-        else if(action == 8) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 8) //     SORTOWANIE SZYBKIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie szybkie (prawy pivot)"<<endl;
             double algoTime = 0.0;
@@ -275,7 +275,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -286,7 +286,7 @@ void FloatMenu::showMenu() {
 
 
         }
-        else if(action == 9) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 9) //     SORTOWANIE SZYBKIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie szybkie (lewy pivot)"<<endl;
             double algoTime = 0.0;
@@ -301,7 +301,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -312,7 +312,7 @@ void FloatMenu::showMenu() {
 
 
         }
-        else if(action == 10) //     SORTOWANIE SZYBKIE - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 10) //     SORTOWANIE SZYBKIE - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie szybkie (random pivot)"<<endl;
             double algoTime = 0.0;
@@ -327,7 +327,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -338,7 +338,7 @@ void FloatMenu::showMenu() {
 
 
         }
-        else if(action == 11) //     SORTOWANIE SHELLA - WYWOŁANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
+        else if(action == 11) //     SORTOWANIE SHELLA - WYWOlANIE,POMIAR CZASU,SPRAWDZENIE POPRAWNOŚCI
         {
             cout<<"Sortowanie Shella"<<endl;
             double algoTime = 0.0;
@@ -352,7 +352,7 @@ void FloatMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -421,7 +421,7 @@ void FloatMenu::readData(auto array)
 
 }
 
-int FloatMenu::checkData(auto *tab,int size) // FUNKCJA SPRAWDZAJĄCA POPRAWNOŚC SORTOWANIA
+int FloatMenu::checkData(auto *tab,int size) // FUNKCJA SPRAWDZAJaCA POPRAWNOŚC SORTOWANIA
 {
     int n=1;
     while(n<size)

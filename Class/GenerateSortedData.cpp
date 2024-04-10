@@ -3,19 +3,15 @@
 //
 
 #include <functional>
-#include <chrono>
 #include "../Headers/GenerateSortedData.h"
 
-//std::default_random_engine generator;
-//std::uniform_int_distribution<int> distribution(0,1000);
-//std::uniform_int_distribution<char> charDist(32,126);
-//std::uniform_real_distribution<> dist(0.0,1000.0);
+
 int increasing = 0;
 
 GenerateSortedData::GenerateSortedData(int flag)
 {
     increasing = flag;
-//    generator.seed(std::chrono::system_clock::now().time_since_epoch().count());
+
 }
 int * GenerateSortedData::generateInt(int size)
 {
@@ -83,22 +79,51 @@ double *GenerateSortedData::generateDouble(int size) {
 
 
 char *GenerateSortedData::generateChar(int size) {
+
     char *randomData= new char[size];
-    if(size > 94)
-        size = 94;
+    int limit = 1;
+    int top = 95;
+    int i=0;
+
+    if(size > 95)
+        limit = size/95;
+    if(size < top)
+        top = size;
     if(increasing)
     {
-        for(int i = 0;i<size;i++)
+        for(i;i<top;i++)
         {
-            randomData[i] = static_cast<char>(i+32) ;
+            for(int j = 0; j<limit;j++)
+            {
+                randomData[i*limit+j] = static_cast<char>(i+32) ;
+            }
         }
+        if(size > top) {
+            for (int k = size % 95; k > 0; k--) {
+                randomData[size - k] = static_cast<char>(127);
+            }
+        }
+
+
     }
     else
     {
-        for(int i = 0; i<size; i++)
+        for(i;i<top;i++)
         {
-            randomData[i] = static_cast<char>(size-i+32);
+            for(int j = 0; j<limit;j++)
+            {
+                randomData[i*limit+j] = static_cast<char>(top-i+32) ;
+            }
         }
+        if(size > top) {
+            for (int k = size % 95; k > 0; k--) {
+                randomData[size - k] = static_cast<char>(32);
+            }
+        }
+//        for(i = 0; i<size; i++)
+//        {
+//            randomData[i] = static_cast<char>(size-i+32);
+//        }
     }
     return randomData;
 }

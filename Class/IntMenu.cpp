@@ -145,7 +145,7 @@ void IntMenu::showMenu() {
             algoTime = getCounter();
             printData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -198,7 +198,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -223,7 +223,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -253,7 +253,7 @@ void IntMenu::showMenu() {
                 cin.clear();
                 cin.ignore();
 
-                cout<<"Błąd danych! \n\n";
+                cout<<"Blad danych! \n\n";
                 break;
             }
             Tester tester(sizeOfArray,type);
@@ -275,7 +275,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -301,7 +301,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -327,7 +327,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;
@@ -352,7 +352,7 @@ void IntMenu::showMenu() {
             printData(tempArray,sizeOfArray);
             checkData(tempArray,sizeOfArray);
 
-            cout<<endl<<"Czas działania: "<<algoTime<<endl;
+            cout<<endl<<"Czas dzialania: "<<algoTime<<endl;
             if(checkData(tempArray,sizeOfArray))
             {
                 cout<<endl<<"Sortowanie -> OK"<<endl<<endl;

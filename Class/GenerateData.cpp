@@ -8,7 +8,7 @@
 
 std::default_random_engine generator;
 std::uniform_int_distribution<int> distribution(0,1000);
-std::uniform_int_distribution<char> charDist(32,126);
+std::uniform_int_distribution<char> charDist(32,127);
 std::uniform_real_distribution<> dist(0.0,1000.0);
 
 GenerateData::GenerateData()
@@ -17,8 +17,6 @@ GenerateData::GenerateData()
 }
 int * GenerateData::generateInt(int size)
 {
-
-
     int *randomData= new int[size];
     for(int i = 0; i<size; i++)
     {

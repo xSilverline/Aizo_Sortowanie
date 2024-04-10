@@ -16,6 +16,7 @@ public:
     static float * generateFloat(int size);
     static double * generateDouble(int size);
     static char * generateChar(int size);
+private:
 
 
 };

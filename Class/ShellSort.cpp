@@ -25,23 +25,6 @@ void calculate(auto *tab,int size)
 {
     int s = getShift(size);
 
-//    for(s;s>0;s/=3)
-//    {
-//        for(int i = s; i<size; i++)
-//        {
-//            auto current = tab[i];
-//
-//            for(int j = i-s; j>=0; j-=s)
-//            {
-//                if(tab[j] > current)
-//                {
-//                    tab[j+s] = tab[j];
-//                    tab[j] = current;
-//                }
-//            }
-//
-//        }
-//    }
 
     for(s;s>0;s/=3)
     {
@@ -62,23 +45,6 @@ void calculate(auto *tab,int size)
 
         }
     }
-
-//    while(s>0)
-//    {
-//        for(int j = size-s-1;j>=0;j--)
-//        {
-//            auto x = tab[j];
-//            int i = j+s;
-//            while(i<=size-1 && x > tab[i])
-//            {
-//                tab[i-s] = tab[i];
-//                i += s;
-//            }
-//            tab[i-s] = x;
-//        }
-//        s/=3;
-//    }
-
 
 }
 

@@ -73,13 +73,26 @@ double *GeneratePartialySortedData::generateDouble(int size) {
 
 char *GeneratePartialySortedData::generateChar(int size) {
     char *randomData= new char[size];
+    int limit = 1;
+    int lastindex = 0;
+    int numOfLetters = (95*partOfArray)/100;
     int sortedSize = (size * partOfArray) / 100;
-    std::uniform_int_distribution<char> charDist(32,126);
-    for(int i = 0; i<sortedSize; i++)
+    if(numOfLetters < sortedSize)
+        limit = sortedSize/numOfLetters;
+    int firstRand = numOfLetters+32;
+    std::uniform_int_distribution<char> charDist(char(firstRand),127);
+
+    for(int i=0;i < numOfLetters;i++)
     {
-        randomData[i] = static_cast<char>(i);
+        for(int j = 0; j<limit;j++)
+        {
+            randomData[i*limit+j] = static_cast<char>(i+32) ;
+            lastindex++;
+        }
     }
-    for(int i = sortedSize ; i<size; i++)
+
+
+    for(int i = lastindex ; i<size; i++)
     {
         randomData[i] = charDist(generatorP);
     }

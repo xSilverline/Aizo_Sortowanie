@@ -33,7 +33,7 @@ Tester::Tester(int s, int t)
 void Tester::startCounter() // FUNKCJA STARTUJĄCA LICZNIK DO POMIARU CZASU
 {
     LARGE_INTEGER largeInteger;
-    if(!QueryPerformanceFrequency(& largeInteger))
+    if(!QueryPerformanceFrequency(&largeInteger))
         cout<<"Blad zliczania czasu"<<endl;
 
     testfreq = double(largeInteger.QuadPart) / 1000.0;
@@ -45,7 +45,7 @@ void Tester::startCounter() // FUNKCJA STARTUJĄCA LICZNIK DO POMIARU CZASU
 double Tester::getCounter() // FUNKCJA ZWRACAJĄCA OBECNY STAN LICZNIKA
 {
     LARGE_INTEGER largeInteger;
-    QueryPerformanceCounter(& largeInteger);
+    QueryPerformanceCounter(&largeInteger);
     return double(largeInteger.QuadPart-testcounterStart)/testfreq;
 }
 
@@ -68,7 +68,6 @@ int checkData(auto *tab,int size) // FUNKCJA SPRAWDZAJĄCA POPRAWNOŚC SORTOWANI
 
 void Tester::testDouble(int *passCounter, double *timeCounter, int gentype)
 {
-//    auto *tab = new double [sizeOfTestArray];
     double *tab;
     auto *p1 = new double [sizeOfTestArray];
     auto *p2 = new double [sizeOfTestArray];
@@ -372,11 +371,11 @@ void Tester::testSorting() // FUNKCJA TESTUJĄCA Z POWTÓRZENIEM 100 RAZY, POMIA
     cout<<"Sortowanie shella ((3^k-1)/2): "<<timeCounter[7]/100<<" ms"<<endl<<endl;
 
 
-    cout<<"TEST"<<endl;
-    startCounter();
-    Sleep(1000);
-    double test = getCounter();
-    cout<<"Dokladnosc zegara (1000): "<<test<<endl<<endl;
+//    cout<<"TEST"<<endl;
+//    startCounter();
+//    Sleep(1000);
+//    double test = getCounter();
+//    cout<<"Dokladnosc zegara (1000): "<<test<<endl<<endl;
 
     delete[] passCounter;
     delete[] timeCounter;
@@ -491,7 +490,7 @@ void Tester::testFloat(int *passCounter, double *timeCounter, int gentype) {
 
 void Tester::testInt(int *passCounter, double *timeCounter, int gentype) {
     int *tab;
-//    int *tab = new int[sizeOfTestArray];
+
     int *p1 = new int[sizeOfTestArray];
     int *p2 = new int[sizeOfTestArray];
     int *p3 = new int[sizeOfTestArray];
